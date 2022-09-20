@@ -1,25 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
+import { search } from "./store/actions";
+import {fillTable} from './fillTable'
 
-function App() {
+
+function App(props) {
+  let table = fillTable(props);
+  const dispatch = props.dispatch
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App">
+        <div>
+          <input onChange={(e) => {dispatch(search(e.target.value))}} value={props.inputData}></input>
+        </div>
+        <div className='table-container'>
+          <div className ='userName'>User name</div>
+          <div className='action'>Action</div>
+          <div className='createAt'>Created at</div>
+        </div>
+        {table}
+      </div>
   );
 }
 
 export default App;
+
